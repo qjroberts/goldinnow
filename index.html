@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Gold-in Opportunity</title>
+    <meta name="description" content="We buy all types of gold: scrap, broken, or unwanted!">
+
+    <link rel="canonical" href="http://www.goldinnow.com/">
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+  </head>
+
+  <body>
+    <div class="container-fluid">
+      <header>
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mainNav" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/#">Gold-in Opportunity</a>
+          </div>
+          <div class="collapse navbar-collapse" id="mainNav">
+            <ul class="nav navbar-nav">
+              <li><a href="/#contact" data-toggle="collapse" data-target=".navbar-collapse">Contact</a></li>
+              <li><a href="/#estimate" data-toggle="collapse" data-target=".navbar-collapse">Estimate</a></li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+
+      <main aria-label="Content">
+        <section class="row text-center">
+          <a id="intro" class="sr-only anchor-offset">Welcome to Gold-in Opportunity</a>
+
+          <div class="well well-lg gold-background">
+            <div class="gold-overlay">
+              <p class="lead">We buy all types of gold: scrap, broken, or unwanted!<br>
+              Your chance to get cash for your gold!</p>
+
+              <a href="#estimate" class="btn btn-default">Get an estimate</a>
+              <a href="#contact" class="btn btn-primary">Make an appointment</a>
+            </div>
+          </div>
+        </section>
+
+        <hr>
+
+        <section class="row text-center">
+          <a id="estimate" class="sr-only anchor-offset">Estimator</a>
+          <p class="lead">Estimate how much you'll make with our handy estimator!</p>
+
+          <form id="estimator-form" class="well">
+            <div class="form-group">
+              <div class="input-group center-block">
+                <label class="sr-only" for="estimator-type">Type of gold</label>
+                <label class="radio-inline">
+                  <input class="radio-inline" type="radio" name="estimator-type" value="10">
+                  10K
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="estimator-type" value="14">
+                  14K
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="estimator-type" value="18">
+                  18K
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="estimator-type" value="24">
+                  24K
+                </label>
+              </div>
+
+              <br>
+
+              <div class="form-inline">
+                <label for="estimator-weight">Weight</label>
+                <div class="input-group">
+                  <input class="form-control text-right" type="number" min="0" name="estimator-weight">
+                  <div class="input-group-addon">grams</div>
+                </div>
+
+                <label for="estimator-spot">Spot price</label>
+                <div class="input-group">
+                  <div class="input-group-addon">$</div>
+                  <input class="form-control text-right" type="number" min="0" name="estimator-spot">
+                </div>
+              </div>
+
+              <strong class="form-control-static" id="estimator-estimate">$?.??</strong>
+            </div>
+
+            <img class="img-responsive center-block" src="http://www.kitconet.com/images/quotes_2a.gif" alt="Spot prices, curtesy of kitco.com">
+
+            <noscript>Please enable JavaScript to use the Estimator.</noscript>
+          </form>
+        </section>
+
+        <hr>
+
+        <section class="row">
+          <a id="contact" class="sr-only anchor-offset">Contact Information</a>
+          <div class="col-md-4 col-md-offset-4">
+            <div class="panel panel-default">
+              <div class="panel-heading"><h4>Contact Information</h4></div>
+              <div class="panel-body">
+                <address>
+                  <strong>Steve Roberts</strong><br>
+                  Phone: <a href="tel:+12267508164">+1 (226) 750-8164</a><br>
+                  Email: <a href="mailto:steve@goldinnow.com">steve@goldinnow.com</a><br>
+                  Website: <a href="http://www.goldinnow.com">http://www.goldinnow.com</a><br>
+                </address>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="page-footer text-center">
+        &copy; 2017 Gold-in Opportunity<br>
+        <a href="/privacy-policy">Privacy Policy</a>
+      </footer>
+    </div>
+
+    <script>
+      function estimate(type, weight, spot) {
+        var troyOunceWeight = weight / 31.1034768;
+        var valuePrice = (type / 24) * spot;
+        return (troyOunceWeight * valuePrice);
+      }
+
+      var form = document.getElementById('estimator-form');
+      var typeEl = form.elements['estimator-type'];
+      var weightEl = form.elements['estimator-weight'];
+      var spotEl = form.elements['estimator-spot'];
+      var estimateEl = document.getElementById('estimator-estimate');
+
+      function getNumber(val) {
+        var num = parseInt(val, 10);
+        return (!isNaN(num) && num > 0) ? num : undefined;
+      }
+      function estimateReturn() {
+        var type = getNumber(typeEl.value);
+        var weight = getNumber(weightEl.value);
+        var spot = getNumber(spotEl.value);
+
+        if (type !== undefined && weight !== undefined && spot !== undefined) {
+          estimateEl.innerHTML = "$" + estimate(type, weight, spot).toFixed(2);
+        } else {
+          estimateEl.innerHTML = "$?.??";
+        }
+      }
+
+      document.addEventListener('ready', estimateReturn);
+      typeEl.forEach(function _radioListener(el) {
+        el.addEventListener('click', estimateReturn);
+      });
+      weightEl.addEventListener('blur', estimateReturn);
+      weightEl.addEventListener('change', estimateReturn);
+      weightEl.addEventListener('keyup', estimateReturn);
+      spotEl.addEventListener('blur', estimateReturn);
+      spotEl.addEventListener('change', estimateReturn);
+      spotEl.addEventListener('keyup', estimateReturn);
+    </script>
+    <script src="/assets/js/jquery-3.2.0.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,27 @@
+body { padding-top: 70px; }
+hr { width: 80%; }
+section { padding: 30px 15px; }
+#estimator-estimate { font-size: 2.6em; }
+.container-fluid { padding-left: 0; padding-right: 0; }
+.anchor-offset {
+  display: block;
+  position: relative;
+  top: -70px;
+  visibility: hidden;
+}
+.gold-background {
+  background-image: url('/assets/images/gold.jpg');
+  background-size: cover;
+}
+.gold-overlay {
+  background: rgba(252, 248, 227, 0.65);
+  border-radius: 4px;
+  display: inline-block;
+  margin: 1em;
+  padding: 1em;
+}
+.page-footer {
+  border-top: 1px solid #eee;
+  padding-bottom: 3em;
+  padding-top: 3em;
+}
